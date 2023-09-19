@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="css/nullstyle.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<title>task7</title>
+	</head>
+	<body>
+		<main class="page">
+			<div class="page__container">
+				<div class="task">
+					<div class="task__condition text">
+						Задача 8. Задаємо користувачу задачу з додавання двох чисел. Визначити скільки секунд було використано для розв’язання задачі.
+					</div>
+				</div>
+				<div class="example"></div>
+			</div>
+		</main>
+		<script>
+			class AddTask {
+				constructor(containerSelector) {
+					this.container = document.querySelector(containerSelector)
+				}
+				getRandNum(minNum, maxNum) {
+					return minNum + Math.floor(Math.random() * (maxNum - minNum + 1))
+				}
+				render(containerSelector) {
+					this.taskBLock = document.createElement("div")
+					//============
+					let resetButton = document.createElement("button")
+					resetButton.innerText = "новий приклад"
+					//============
+					let answerInput = document.createElement("input")
+					answerInput.setAttribute("type", "number")
+					answerInput.setAttribute("placeholder", "Введіть відповідь")
+					//============
+					this.resultBlock = document.createElement("div")
+					if (this.container) {
+						this.container.append(this.taskBLock)
+						this.container.append(answerInput)
+						this.container.append(this.resultBlock)
+						this.container.append(resetButton)
+						//===============
+						this.answerInput = answerInput
+						this.resetButton = resetButton
+					}
+				}
+				createTaskValues(minNum, maxNum) {
+					const numOne = this.getRandNum(minNum, maxNum)
+					const numTwo = this.getRandNum(minNum, maxNum)
+					this.corecAnswer = numOne + numTwo
+					this.taskBLock.innerText = `${numOne} + ${numTwo}`
+					this.startDate = new Date()
+					this.resultBlock.innerText = ""
+					this.answerInput.value = ""
+				}
+				getTask(minNum, maxNum) {
+					this.render()
+					this.createTaskValues(minNum, maxNum)
+					//==================================
+					this.answerInput.addEventListener("change", () => {
+						let userSpentTimeMinutes = 0
+						let endDate = new Date()
+						let userSpentTimeSeconds = parseInt((endDate - this.startDate) / 1000)
+						if (userSpentTimeSeconds >= 60) {
+							userSpentTimeMinutes = Math.floor(userSpentTimeSeconds / 60)
+							userSpentTimeSeconds = userSpentTimeSeconds % 60
+						}
+						let overalSpentTime = `${userSpentTimeMinutes}m : ${userSpentTimeSeconds}s --- `
+						this.resultBlock.innerText = ""
+						this.resultBlock.append(overalSpentTime)
+						if (parseInt(this.answerInput.value) === this.corecAnswer) this.resultBlock.append("ви молодець")
+						else this.resultBlock.append("треба ще повчитись")
+					})
+					//==================================
+					this.resetButton.addEventListener("click", () => this.createTaskValues(minNum, maxNum))
+				}
+			}
+			window.onload = function () {
+				let task = new AddTask(".example")
+				task.getTask(1, 100)
+			}
+		</script>
+	</body>
+</html>

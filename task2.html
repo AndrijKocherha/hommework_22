@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="css/nullstyle.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<title>task2</title>
+	</head>
+	<body>
+		<main class="page">
+			<div class="page__container">
+				<div class="task">
+					<div class="task__condition text">Задача 3. Визначити поточну пору року</div>
+				</div>
+				<script>
+					//function getSeason() {
+					//	let mounth = new Date().getMonth()
+					//	let season
+					//	switch (mounth) {
+					//		case 11:
+					//		case 0:
+					//		case 1:
+					//			season = "Winter"
+					//			break
+					//		case 2:
+					//		case 3:
+					//		case 4:
+					//			season = "Spring"
+					//			break
+					//		case 5:
+					//		case 6:
+					//		case 7:
+					//			season = "Summer"
+					//			break
+					//		case 8:
+					//		case 9:
+					//		case 10:
+					//			season = "Autum"
+					//			break
+					//	}
+					//	return season
+					//}
+					//let season = getSeason()
+					//console.log(season)
+					//==============================
+					function getSeason() {
+						let month = new Date().getMonth()
+						let seasonIndex = month / 3
+						if (month === 11) seasonIndex = 0
+						const seasons = ["Зима", "Весна", "Лето", "Осень"]
+						return seasons[Math.round(seasonIndex)]
+					}
+					let season = getSeason()
+					console.log(season)
+				</script>
+			</div>
+		</main>
+	</body>
+</html>

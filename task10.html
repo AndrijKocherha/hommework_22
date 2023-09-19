@@ -1,0 +1,88 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="css/nullstyle.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<title>task10</title>
+	</head>
+	<body>
+		<main class="page">
+			<div class="page__container">
+				<div class="task">
+					<div class="task__condition text">Задача 12. Сформувати масив з 1000 елементів від 1 до 800. Порівняти час сортування бульбашкою і вставкою.</div>
+				</div>
+			</div>
+		</main>
+		<script>
+			class SortArr {
+				constructor() {}
+				getRandNum(minNum, maxNum) {
+					return minNum + Math.floor(Math.random() * (maxNum - minNum + 1))
+				}
+				getArray(minNum, maxNum, elAmount) {
+					this.arr = []
+					for (let i = 0; i < elAmount; i++) {
+						let el = this.getRandNum(minNum, maxNum)
+						this.arr.push(el)
+					}
+					return this.arr
+				}
+				getsortTimeByBubble() {
+					let arrCopy = [...this.arr]
+					let change
+					const startTime = new Date().getTime()
+					do {
+						change = false
+						for (let i = 1; i < arrCopy.length; i++) {
+							if (arrCopy[i - 1] > arrCopy[i]) {
+								let temp = arrCopy[i - 1]
+								arrCopy[i - 1] = arrCopy[i]
+								arrCopy[i] = temp
+								change = true
+							}
+						}
+					} while (change)
+					const endTime = new Date().getTime()
+					const elapsedTime = endTime - startTime
+					//console.log(`Час виконання: ${elapsedTime} ms`)
+					return elapsedTime
+				}
+				getsortTimeByInsert() {
+					let arrCopy = [...this.arr]
+					const startTime = new Date().getTime()
+					for (let i = 1; i < arrCopy.length; i++) {
+						let curEl = arrCopy[i]
+						let prevIndx = i - 1
+						while (prevIndx >= 0 && arrCopy[prevIndx] > curEl) {
+							arrCopy[prevIndx + 1] = arrCopy[prevIndx]
+							prevIndx -= 1
+						}
+						arrCopy[prevIndx + 1] = curEl
+					}
+
+					const endTime = new Date().getTime()
+					const elapsedTime = endTime - startTime
+					return elapsedTime
+				}
+				compereTimeOfSortByBubbleAndByInsert() {
+					let timeByBubble = this.getsortTimeByBubble()
+					let timeByInsert = this.getsortTimeByInsert()
+					console.log(timeByBubble)
+					if (timeByBubble > timeByInsert) alert(`вставкою швидше: вставка = ${timeByInsert}ms  бульбашка =  ${timeByBubble}ms`)
+					else alert(`бульбашкою швидше: вставка = ${timeByInsert}ms бульбашка = ${timeByBubble}ms `)
+				}
+			}
+			window.onload = function () {
+				let sortArr = new SortArr()
+				sortArr.getArray(1, 800, 1000)
+				sortArr.compereTimeOfSortByBubbleAndByInsert()
+				//let timeByBubble = sortArr.getsortTimeByBubble()
+				//let timeByInsert = sortArr.getsortTimeByInsert()
+				//console.log(timeByBubble)
+				//console.log(timeByInsert)
+			}
+		</script>
+	</body>
+</html>

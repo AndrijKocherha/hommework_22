@@ -1,0 +1,40 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="css/nullstyle.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<title>task8</title>
+	</head>
+	<body>
+		<main class="page">
+			<div class="page__container">
+				<div class="task">
+					<div class="task__condition text">Задача 9. Користувач іде у відпустку на 56 днів. Визначити дату на момент його повернення.</div>
+				</div>
+				<div class="vacation">
+					<div class="vacation__start">
+						<label for="inputId" class="vacation__label">Введіть коли ви йдете у відпустку </label>
+						<input id="inputId" type="date" class="vacation__input" />
+					</div>
+					<div class="vacation__return-date">Закінчення відпустки :</div>
+				</div>
+			</div>
+		</main>
+		<script>
+			function setDateOfReturnFromVacation(dateInput, vacationDaysCount, resultSelector) {
+				let vacationStart = new Date(dateInput.value)
+				vacationStart.setDate(vacationStart.getDate() + vacationDaysCount)
+				let resultBLock = document.querySelector(resultSelector)
+				if (resultBLock) {
+					resultBLock.append(vacationStart.toLocaleDateString("uk-UA"))
+				}
+			}
+			window.onload = function () {
+				let inputWithStartDate = document.querySelector(".vacation__input")
+				inputWithStartDate.onchange = () => setDateOfReturnFromVacation(inputWithStartDate, 56, ".vacation__return-date")
+			}
+		</script>
+	</body>
+</html>

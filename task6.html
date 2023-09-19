@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="css/nullstyle.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<title>task6</title>
+	</head>
+	<body>
+		<main class="page">
+			<div class="page__container">
+				<div class="task">
+					<div class="task__condition text">Задача 7. Користувач бере авто на вказану кількість годин. Визначити кінцевий час повернення.</div>
+				</div>
+				<div class="block">
+					<input placeholder="введіть години оренди" type="number" class="block__input" />
+					<div class="block__return-date"><span></span></div>
+				</div>
+			</div>
+		</main>
+		<script>
+			function dateOfReturnningCar(hoursInput, resultBLock) {
+				let date = new Date()
+				let hours = parseInt(hoursInput.value)
+				//====================================
+				if (hours > 0 && hours !== "" && resultBLock) {
+					date.setHours(date.getHours() + hours)
+					console.log(date)
+					resultBLock.innerText = date
+				}
+			}
+			window.onload = function () {
+				let input = document.querySelector(".block__input")
+				let resultBLock = document.querySelector(".block__return-date span")
+				input.onchange = () => dateOfReturnningCar(input, resultBLock)
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="css/nullstyle.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<title>task5</title>
+	</head>
+	<body>
+		<main class="page">
+			<div class="page__container">
+				<div class="task">
+					<div class="task__condition text">Задача 6. Користувач іде у відпустку на 56 днів. Визначити дату на момент його повернення.</div>
+				</div>
+				<div class="block">
+					<div class="block__input">
+						<label for="dateId">Введіть коли ви ідете у відпустку </label>
+						<input id="dateId" type="date" />
+					</div>
+					<button id="buttonId">дата завершення відпустки</button>
+					<div class="block__date-of-come-back"></div>
+				</div>
+			</div>
+		</main>
+		<script>
+			function findOutdateOfReturn(resultBLock, date, days) {
+				let startDate = new Date(date.value)
+				if (date.value !== "") {
+					console.log(startDate)
+
+					startDate.setDate(startDate.getDate() + days)
+					console.log(startDate)
+				}
+				resultBLock.innerText = startDate
+			}
+			let button = document.getElementById("buttonId")
+			button.addEventListener("click", () => findOutdateOfReturn(document.querySelector(".block__date-of-come-back"), document.getElementById("dateId"), 56))
+		</script>
+	</body>
+</html>

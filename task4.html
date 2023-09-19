@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="css/nullstyle.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<title>task4</title>
+	</head>
+	<body>
+		<main class="page">
+			<div class="page__container">
+				<div class="task">
+					<div class="task__condition text">Задача 5. Користувач вводить дату народження. Визначити, скільки йому повних років.</div>
+				</div>
+				<input id="dateId" type="date" />
+				<button id="buttonId">розрахувати</button>
+				<div id="userAgeId"></div>
+			</div>
+		</main>
+		<script>
+			function getUserAge(userDateOfBrith, container) {
+				let userYear = new Date(userDateOfBrith.value).getFullYear()
+				let userAge = new Date().getFullYear() - userYear
+				if (container) {
+					if (userAge > 0) container.innerText = `${userAge}`
+					else container.innerText = "не може бути такого віку"
+				}
+			}
+			let userDateOfBrith = document.getElementById("dateId")
+			let button = document.getElementById("buttonId")
+			button.onclick = () => getUserAge(userDateOfBrith, document.getElementById("userAgeId"))
+		</script>
+	</body>
+</html>

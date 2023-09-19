@@ -1,0 +1,63 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="css/nullstyle.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<title>task9</title>
+	</head>
+	<body>
+		<main class="page">
+			<div class="page__container">
+				<div class="task">
+					<div class="task__condition text">
+						Задача 10 . Дано дата виробництва йогурта (вводимо рік, місяць, день) та кількість днів придатності. Визначити чи є він придатним на даний момент.
+					</div>
+				</div>
+				<div class="yogurt">
+					введіть дату виготивлення<input type="date" class="yogurt__expiration-date" />
+					<input placeholder="скільки днів він буде придатним" class="yogurt__suitability-long" type="number" />
+					<div class="yogurt__result"></div>
+				</div>
+			</div>
+		</main>
+		<script>
+			function setIsYogurtSuitableOrNo(dateCreatingInput, suitabilityLongInput, resultBlockSelector) {
+				const curDate = new Date()
+				const creatingDate = new Date(dateCreatingInput.value)
+				const suitabilityLong = parseInt(suitabilityLongInput.value)
+				let resultBlock = document.querySelector(resultBlockSelector)
+				//*******************************************************************************************
+				//if (curDate >= creatingDate) {
+				//	const suitabilityLong = parseInt(suitabilityLongInput.value)
+				//	if (suitabilityLong > 0) {
+				//		creatingDate.setDate(creatingDate.getDate() + suitabilityLong)
+				//		//resultBlock.innerText = creatingDate.toLocaleDateString("uk-UA")
+				//		if (creatingDate <= curDate) {
+				//			resultBlock.innerText = "йогурт придатний"
+				//		} else resultBlock.innerText = "йогурт не придатний"
+				//	} else if (suitabilityLong <= 0) resultBlock.innerText = "не може бути відємної дати придатності"
+				//} else resultBlock.innerText = "йогурт ще не створено"
+				//*******************************************************************************************
+				try {
+					if (curDate < creatingDate) throw new Error("Не можу бути дати створення більшою за теперішню дату")
+					if (suitabilityLong <= 0) throw new Error("Не може бути термін придатності меншим 1 дня")
+					//------------------------
+					creatingDate.setDate(creatingDate.getDate() + suitabilityLong)
+					if (creatingDate < curDate) resultBlock.innerText = "придатний"
+					else if (creatingDate == "Invalid Date" || suitabilityLong == "") resultBlock.innerText = ""
+					else resultBlock.innerText = "не придатний"
+				} catch (error) {
+					resultBlock.innerText = error.message
+				}
+			}
+			window.onload = function () {
+				let creatingInput = document.querySelector(".yogurt__expiration-date")
+				let suitabilityLongInput = document.querySelector(".yogurt__suitability-long")
+				creatingInput.addEventListener("change", () => setIsYogurtSuitableOrNo(creatingInput, suitabilityLongInput, ".yogurt__result"))
+				suitabilityLongInput.addEventListener("change", () => setIsYogurtSuitableOrNo(creatingInput, suitabilityLongInput, ".yogurt__result"))
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="css/nullstyle.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<title>task0</title>
+	</head>
+	<body>
+		<main class="page">
+			<div class="page__container">
+				<div class="task">
+					<div class="task__condition text">Задача 1. Визначити привітання у залежності від часу доби (Доброго дня, Доброго ранку, Доброго вечора)</div>
+				</div>
+			</div>
+		</main>
+		<script>
+			function getWelcome() {
+				let curHour = new Date().getHours()
+				console.log(curHour)
+				if (curHour >= 18) return "Доброго вечора"
+				else if (curHour >= 10) return "Доброго Дня"
+				else if (curHour >= 0) return "Доброго ранку"
+			}
+			let welcome = getWelcome()
+			console.log(welcome)
+		</script>
+	</body>
+</html>
